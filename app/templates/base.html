@@ -6,6 +6,8 @@
     <title>Welcome to Microblog</title>
     {% endif %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {{ moment.include_jquery() }}
+    {{ moment.include_moment() }}
   </head>
   <body>
     <div>Microblog: 
