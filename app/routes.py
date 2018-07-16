@@ -23,16 +23,9 @@ def index():
       db.session.commit()
       flash('Your post is now live!')
       return redirect(url_for('index'))
-    posts = [
-      {
-        'author': {'username': 'werewolf'},
-        'body': 'beautiful moon out tonight!'
-      },
-      {
-        'author': {'username': 'vampire'},
-        'body': 'heading out for drinks soon!'
-      }
-    ]
+    username='wolfman'
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = user.posts.all()
     return render_template('index.html', title='Home', posts=posts, form=form) 
 
 @app.route('/login', methods=['GET', 'POST'])
