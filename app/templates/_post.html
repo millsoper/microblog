@@ -5,7 +5,11 @@
        <a href="{{url_for('user', username=post.author.username) }}">
          {{ post.author.username }}
        </a>
-       said {{ moment(post.timestamp).fromNow() }}:<br>{{ post.body }}
+       said {{ moment(post.timestamp).fromNow() }}:<br>
+       {{ post.body }}<br>
+       {% if post.author.username == current_user.username %}
+       <p>Edit Post</p>       
+       {% endif %}
     </td>
   </tr>
 </table>
