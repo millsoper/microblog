@@ -33,7 +33,7 @@ def index():
         'body': 'heading out for drinks soon!'
       }
     ]
-    return render_template('index.html', title='Home', posts=posts) 
+    return render_template('index.html', title='Home', posts=posts, form=form) 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
