@@ -5,10 +5,15 @@
     {% else %}
     <title>Welcome to Microblog</title>
     {% endif %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {{ moment.include_jquery() }}
+    {{ moment.include_moment() }}
   </head>
   <body>
     <div>Microblog: 
       <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('explore') }}">Explore</a>
+      <a href="{{ url_for('about') }}">About</a>
       {% if current_user.is_anonymous %}
       <a href="{{ url_for('login') }}">Login</a>
       {% else %}
