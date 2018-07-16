@@ -117,6 +117,18 @@ def edit_profile():
   return render_template('edit_profile.html', title='Edit Profile',
                          form=form)
 
+@app.route('/edit_post', methods=['GET', 'POST'])
+@login_required
+def edit_post():
+  form = EditPostForm(postId)
+  if form.validate_on_submit():
+    post.body = form.body.data
+    dbt.session.commit()
+    flash('Your changes have been saved.')
+  elif request.method == 'GET':
+    form.body.data = post.body.data
+  return render_template('edit_post.html', title='Edit Post', form=form)
+
 @app.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():
   if current_user.is_authenticated:
