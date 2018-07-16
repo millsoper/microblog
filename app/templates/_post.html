@@ -6,7 +6,7 @@
          {{ post.author.username }}
        </a>
        said {{ moment(post.timestamp).fromNow() }}:<br>
-       {{ post.body }}<br>
+       {{ post.body }}
        {% if post.author.username == current_user.username %}
        <p>Edit Post</p>       
        {% endif %}
