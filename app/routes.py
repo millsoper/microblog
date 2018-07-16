@@ -4,7 +4,7 @@ from werkzeug.urls import url_parse
 from datetime import datetime
 from app.models import User, Post
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, ResetPasswordRequestForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, ResetPasswordRequestForm, EditPostForm
 from app.email import send_password_reset_email
 
 @app.before_request
@@ -120,13 +120,17 @@ def edit_profile():
 @app.route('/edit_post', methods=['GET', 'POST'])
 @login_required
 def edit_post():
-  form = EditPostForm(postId)
+  postBody = request.args.get('post')
+  postId = request.args.get('postId')
+  givenPost = Post.query.filter_by(id=postId).first()
+  form = EditPostForm(postBody)
   if form.validate_on_submit():
-    post.body = form.body.data
-    dbt.session.commit()
-    flash('Your changes have been saved.')
+    if givenPost:
+      givenPost.body = form.body.data
+      db.session.commit()
+      flash('Your changes have been saved.')
   elif request.method == 'GET':
-    form.body.data = post.body.data
+    form.body.data = postBody
   return render_template('edit_post.html', title='Edit Post', form=form)
 
 @app.route('/reset_password_request', methods=['GET', 'POST'])
