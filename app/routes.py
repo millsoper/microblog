@@ -122,15 +122,21 @@ def edit_profile():
 def edit_post():
   postBody = request.args.get('post')
   postId = request.args.get('postId')
+  month = request.args.get('month')
+  date = request.args.get('date')
   givenPost = Post.query.filter_by(id=postId).first()
   form = EditPostForm(postBody)
   if form.validate_on_submit():
     if givenPost:
+      newDate = givenPost.timestamp.replace(day=form.timestamp.date, month=form.timestamp.month)
       givenPost.body = form.body.data
+      givenPost.timestamp = newDate
       db.session.commit()
       flash('Your changes have been saved.')
   elif request.method == 'GET':
     form.body.data = postBody
+    form.date.data = date
+    form.month.data = month 
   return render_template('edit_post.html', title='Edit Post', form=form)
 
 @app.route('/reset_password_request', methods=['GET', 'POST'])
