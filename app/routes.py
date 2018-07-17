@@ -135,7 +135,7 @@ def edit_post():
       flash('Your changes have been saved.')
   elif request.method == 'GET':
     form.body.data = postBody
-    form.date.data = oldDate.date
+    form.date.data = oldDate.day
     form.month.data = oldDate.month
   return render_template('edit_post.html', title='Edit Post', form=form)
 
