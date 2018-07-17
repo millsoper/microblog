@@ -43,7 +43,7 @@ class EditProfileForm(FlaskForm):
         raise ValidationError('Please use a different username.')
 
 class EditPostForm(FlaskForm):
-  body = StringField('Body', validators=[DataRequired()])
+  body = TextAreaField('Body', validators=[DataRequired(), Length(min=1, max=420)])
   submit = SubmitField('Submit')
 
   def __init__(self, original_body, *args, **kwargs):
@@ -52,7 +52,7 @@ class EditPostForm(FlaskForm):
 
 class PostForm(FlaskForm):
   post = TextAreaField('Say something', validators=[
-    DataRequired(), Length(min=1, max=140)])
+    DataRequired(), Length(min=1, max=420)])
   submit=SubmitField('Submit')
 
 class ResetPasswordRequestForm(FlaskForm):
