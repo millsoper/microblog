@@ -123,19 +123,20 @@ def edit_post():
   postBody = request.args.get('post')
   postId = request.args.get('postId')
   timestamp = request.args.get('timestamp')
+  oldDate = datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S.%f")
   givenPost = Post.query.filter_by(id=postId).first()
   form = EditPostForm(postBody)
   if form.validate_on_submit():
     if givenPost:
-      newDate = givenPost.timestamp.replace(day=form.timestamp.date, month=form.timestamp.month)
+      newDate = oldDate.replace(day=form.date.data, month=form.month.data)
       givenPost.body = form.body.data
       givenPost.timestamp = newDate
       db.session.commit()
       flash('Your changes have been saved.')
   elif request.method == 'GET':
     form.body.data = postBody
-    form.date.data = timestamp.date
-    form.month.data = timestamp.month
+    form.date.data = oldDate.date
+    form.month.data = oldDate.month
   return render_template('edit_post.html', title='Edit Post', form=form)
 
 @app.route('/reset_password_request', methods=['GET', 'POST'])
