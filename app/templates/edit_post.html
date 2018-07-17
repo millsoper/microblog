@@ -11,6 +11,20 @@
       <span style="color: red;">[{{ error }}]</span>
       {% endfor %}
     </p>
+    <p>
+      {{ form.month.label }}<br>
+      {{ form.month() }}<br>
+      {% for error in form.month.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+    </p>
+    <p>
+      {{ form.date.label }}<br>
+      {{ form.date() }}<br>
+      {% for error in form.date.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+    </p>
     <p>{{ form.submit() }}</p>
   </form>
 {% endblock %}
