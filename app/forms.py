@@ -44,6 +44,8 @@ class EditProfileForm(FlaskForm):
 
 class EditPostForm(FlaskForm):
   body = TextAreaField('Body', validators=[DataRequired(), Length(min=1, max=420)])
+  month = SelectField('Month', choices=[(0, 'Jan'), (1, 'Feb'), (2, 'Mar'), (3, 'Apr'), (4, 'May'), (5, 'Jun'), (6, 'Jul'), (7, 'Aug'), (8, 'Sep'), (9, 'Oct'), (10, 'Nov'), (11, 'Dec')])
+  day = SelectField('Day', choices=[(1,1), (2,2), (3,3), (4,4), (5,5), (6,6), (7,7), (8,8), (9,9), (10,10), (11,11), (12,12)])
   submit = SubmitField('Submit')
 
   def __init__(self, original_body, *args, **kwargs):
