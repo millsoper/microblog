@@ -15,6 +15,7 @@ After you have all requirements installed, from the root of the main directory r
 - [x] let users edit posts text
 - [x] let users edit posts date
 - [x] show posts
+- [ ] let users delete posts
 - [ ] make posts searchable
 
 ### Nice to haves:
