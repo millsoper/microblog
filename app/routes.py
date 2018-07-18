@@ -19,7 +19,7 @@ def before_request():
 def index():
     form = PostForm()
     if form.validate_on_submit():
-      post = Post(body=form.post.data, author=current_user)
+      post = Post(body=form.body.data, author=current_user, title=form.title.data)
       db.session.add(post)
       db.session.commit()
       flash('Your post is now live!')
@@ -124,22 +124,22 @@ def edit_profile():
 @app.route('/edit_post', methods=['GET', 'POST'])
 @login_required
 def edit_post():
-  postBody = request.args.get('post')
   postId = request.args.get('postId')
-  timestamp = request.args.get('timestamp')
-  oldDate = datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S.%f")
   givenPost = Post.query.filter_by(id=postId).first()
-  form = EditPostForm(postBody)
+  oldDate = datetime.strptime(str(givenPost.timestamp), "%Y-%m-%d %H:%M:%S.%f")
+  form = EditPostForm(givenPost.body)
   if form.validate_on_submit():
     if givenPost:
       newDate = oldDate.replace(day=form.date.data, month=form.month.data)
       givenPost.body = form.body.data
+      givenPost.title = form.title.data
       givenPost.timestamp = newDate
       db.session.commit()
       flash('Your changes have been saved.')
   elif request.method == 'GET':
-    form.body.data = postBody
+    form.body.data = givenPost.body 
     form.date.data = oldDate.day
+    form.title.data = givenPost.title
     form.month.data = oldDate.month
   return render_template('edit_post.html', title='Edit Post', form=form)
 

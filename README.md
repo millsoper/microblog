@@ -15,7 +15,7 @@ After you have all requirements installed, from the root of the main directory r
 - [x] let users edit posts text
 - [x] let users edit posts date
 - [x] show posts
-- [ ] add titles to blog posts, which links to posts?
+- [x] add titles to blog posts, which links to posts?
 - [x] let users delete posts
 - [x] allow deletion of users
 - [ ] make posts searchable
