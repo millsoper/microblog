@@ -95,6 +95,17 @@ def user(username):
 def about():
   return render_template('about.html', title='About')
 
+@app.route('/delete_profile')
+def delete_profile():
+  id = request.args.get('id')
+  logout_user()
+  usersPosts = Post.query.filter(Post.user_id == id)
+  for post in usersPosts:
+    db.session.delete(post) 
+  User.query.filter(User.id == id).delete()
+  db.session.commit()
+  return redirect(url_for('index'))
+
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
