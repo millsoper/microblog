@@ -25,13 +25,15 @@ After you have all requirements installed, from the root of the main directory r
 - [ ] rewrite the frontend with React
 
 ### Personal site project
-- [ ] hide the login info
+- [x] hide the login info
 - [ ] rewrite code logically for a single user
 - [x] display all posts
 - [ ] remove profile links etc
+- [x] show all posts on index page/remove explore page
 - [x] add an About Me page
 - [ ] add github links etc
 - [x] change dates on posts
+- [ ] *either* enable commenting, or remove avatar functionality.
 
 ### stylez
 - [ ] make it zoomy but have a fallback
