@@ -15,6 +15,7 @@ After you have all requirements installed, from the root of the main directory r
 - [x] let users edit posts text
 - [x] let users edit posts date
 - [x] show posts
+- [ ] add titles to blog posts, which links to posts?
 - [ ] let users delete posts
 - [ ] make posts searchable
 
@@ -30,6 +31,7 @@ After you have all requirements installed, from the root of the main directory r
 - [ ] remove profile links etc
 - [x] add an About Me page
 - [ ] add github links etc
+- [x] change dates on posts
 
 ### stylez
 - [ ] make it zoomy but have a fallback
