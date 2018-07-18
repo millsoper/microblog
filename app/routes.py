@@ -25,10 +25,8 @@ def index():
       flash('Your post is now live!')
       return redirect(url_for('index'))
     page = request.args.get('page', 1, type=int)
-    username='wolfman'
-    user = User.query.filter_by(username=username).first_or_404()
-    posts = user.posts.paginate(
-      page, app.config['POSTS_PER_PAGE'], False)
+    posts =  Post.query.order_by(Post.timestamp.desc()).paginate(
+    page, app.config['POSTS_PER_PAGE'], False) 
     next_url = url_for('index', page=posts.next_num) \
       if posts.has_next else None
     prev_url = url_for('index', page=posts.prev_num) \
@@ -58,6 +56,13 @@ def logout():
   logout_user()
   return redirect(url_for('index'))
 
+@app.route('/delete_post')
+def delete_post():
+  postId = request.args.get('postId')
+  Post.query.filter(Post.id == postId).delete()
+  db.session.commit()
+  return redirect(url_for('index'))
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
   if current_user.is_authenticated:
@@ -71,18 +76,6 @@ def register():
     flash('Congratulations, you are now a registered user!')
     return redirect(url_for('login'))
   return render_template('register.html', title='Register', form=form)
-
-@app.route('/explore')
-def explore():
-  page = request.args.get('page', 1, type=int)
-  posts = Post.query.order_by(Post.timestamp.desc()).paginate(
-    page, app.config['POSTS_PER_PAGE'], False)
-  next_url = url_for('explore', page=posts.next_num) \
-    if posts.has_next else None
-  prev_url = url_for('explore', page=posts.prev_num) \
-    if posts.has_prev else None
-  return render_template('index.html', title='Explore', posts=posts.items,
-                        next_url=next_url, prev_url=prev_url)
 
 @app.route('/user/<username>')
 @login_required
@@ -101,6 +94,17 @@ def user(username):
 @app.route('/about')
 def about():
   return render_template('about.html', title='About')
+
+@app.route('/delete_profile')
+def delete_profile():
+  id = request.args.get('id')
+  logout_user()
+  usersPosts = Post.query.filter(Post.user_id == id)
+  for post in usersPosts:
+    db.session.delete(post) 
+  User.query.filter(User.id == id).delete()
+  db.session.commit()
+  return redirect(url_for('index'))
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required

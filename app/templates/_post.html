@@ -5,10 +5,11 @@
        <a href="{{url_for('user', username=post.author.username) }}">
          {{ post.author.username }}
        </a>
-       said {{ moment(post.timestamp).fromNow() }}:<br>
+       said {{ moment(post.timestamp).format("MM-DD-YYYY") }}:<br>
        {{ post.body }}
        {% if post.author.username == current_user.username %}
-       <a href="{{url_for('edit_post', post=post.body, postId=post.id, timestamp=post.timestamp) }}">Edit Post</p>       
+       <a href="{{url_for('edit_post', post=post.body, postId=post.id, timestamp=post.timestamp) }}">Edit</a>       
+       <a href="{{url_for('delete_post', postId=post.id) }}">Delete</a>
        {% endif %}
     </td>
   </tr>
