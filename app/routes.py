@@ -25,7 +25,6 @@ def index():
       flash('Your post is now live!')
       return redirect(url_for('index'))
     page = request.args.get('page', 1, type=int)
-    user = User.query.filter_by(username=username).first_or_404()
     posts =  Post.query.order_by(Post.timestamp.desc()).paginate(
     page, app.config['POSTS_PER_PAGE'], False) 
     next_url = url_for('index', page=posts.next_num) \
