@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
-from app.models import User
+from app.models import User, Post
 from app import db
 from app.auth import bp
 from app.auth.forms import LoginForm, RegistrationForm, ResetPasswordForm, ResetPasswordRequestForm
@@ -29,6 +29,17 @@ def logout():
   logout_user()
   return redirect(url_for('main.index'))
 
+@bp.route('/delete_profile')
+def delete_profile():
+  id = request.args.get('id')
+  logout_user()
+  usersPosts = Post.query.filter(Post.user_id == id)
+  for post in usersPosts:
+    db.session.delete(post) 
+  User.query.filter(User.id == id).delete()
+  db.session.commit()
+  return redirect(url_for('main.index'))
+
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
   if current_user.is_authenticated:
@@ -43,7 +54,7 @@ def register():
     return redirect(url_for('auth.login'))
   return render_template('auth/register.html', title='Register', form=form)
 
-@app.route('/reset_password_request', methods=['GET', 'POST'])
+@bp.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():
   if current_user.is_authenticated:
     return redirect(url_for('main.index'))
@@ -56,7 +67,7 @@ def reset_password_request():
     return redirect(url_for('auth.login'))
   return render_template('auth/reset_password_request.html', title='ResetPassword', form=form)
 
-@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+@bp.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
   if current_user.is_authenticated:
     return redirect(url_for('main.index'))
