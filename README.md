@@ -27,9 +27,9 @@ After you have all requirements installed, from the root of the main directory r
 
 ### Personal site project
 - [x] hide the login info
-- [ ] rewrite code logically for a single user
+- [x] rewrite code logically for a single user
 - [x] display all posts
-- [ ] remove profile links etc
+- [x] remove profile links etc
 - [x] show all posts on index page/remove explore page
 - [x] add an About Me page
 - [ ] add github links etc
