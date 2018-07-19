@@ -1,10 +1,74 @@
 body {
   font-family: sans-serif;
-  color: white;
-  background-color: gray;
+  color: darkslategray;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  font-size: 1.25rem;
 }
 
 a {
   text-decoration: none;
-  color: violet;
+  color: darkturquoise;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+select, label, input, textarea {
+  font-size: 1.15rem;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-links {
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar .link {
+  padding: .25em 0;
+}
+
+.content {
+  margin: 1em auto;
+  max-width: 780px;
+}
+
+.post {
+  margin: .5em;
+}
+
+.post:hover .post-title {
+  color: rgba(0,0,0,1);
+}
+
+.post-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: rgba(0,0,0,.75);
+}
+
+.post-timestamp {
+  color: #8E1600; 
+}
+
+#swirl-block {
+ position: fixed;
+ top: -150px;
+ left: -100px;
+ z-index:-2; 
+ width: 100%;
+ height: auto;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }

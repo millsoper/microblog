@@ -1,12 +1,15 @@
-<table>
-  <tr valign="top">
-    <td>
-       {{ moment(post.timestamp).format("MM-DD-YYYY") }}: {{post.title}}<br>
-       {{ post.body }}
-       {% if post.author.username == current_user.username %}
-       <a href="{{url_for('main.edit_post', postId=post.id) }}">Edit</a>       
-       <a href="{{url_for('main.delete_post', postId=post.id) }}">Delete</a>
-       {% endif %}
-    </td>
-  </tr>
-</table>
+<div class="post">
+  <p class="post-title">
+    <span class="post-timestamp">{{ moment(post.timestamp).format("MM-DD-YYYY") }}:</span>
+    {{post.title}}
+  </p>
+  <p class="post-body">
+      {{ post.body }}
+  </p>
+  {% if post.author.username == current_user.username %}
+  <div class="post-links">
+    <a href="{{url_for('main.edit_post', postId=post.id) }}">Edit</a>       
+    <a href="{{url_for('main.delete_post', postId=post.id) }}">Delete</a>
+  </div>
+  {% endif %}
+</div>
