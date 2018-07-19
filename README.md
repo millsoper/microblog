@@ -18,6 +18,7 @@ After you have all requirements installed, from the root of the main directory r
 - [x] add titles to blog posts, which links to posts?
 - [x] let users delete posts
 - [x] allow deletion of users
+- [ ] separate post out into a separate page, link via title
 - [ ] make posts searchable
 
 ### Nice to haves:
