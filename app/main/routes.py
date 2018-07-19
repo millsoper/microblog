@@ -13,16 +13,8 @@ def before_request():
     db.session.commit()
 
 @bp.route('/', methods=['GET', 'POST'])
-@bp.route('/index', methods=['GET', 'POST'])
-@login_required
+@bp.route('/index', methods=['GET'])
 def index():
-    form = PostForm()
-    if form.validate_on_submit():
-      post = Post(body=form.body.data, author=current_user, title=form.title.data)
-      db.session.add(post)
-      db.session.commit()
-      flash('Your post is now live!')
-      return redirect(url_for('main.index'))
     page = request.args.get('page', 1, type=int)
     posts =  Post.query.order_by(Post.timestamp.desc()).paginate(
     page, current_app.config['POSTS_PER_PAGE'], False) 
@@ -31,7 +23,20 @@ def index():
     prev_url = url_for('main.index', page=posts.prev_num) \
       if posts.has_prev else None
     return render_template('index.html', title='Home', posts=posts.items,
-                            form=form, next_url=next_url, prev_url=prev_url) 
+                            next_url=next_url, prev_url=prev_url) 
+
+@bp.route('/create_post', methods=['GET', 'POST'])
+@login_required
+def create_post():
+    form = PostForm()
+    if form.validate_on_submit():
+      post = Post(body=form.body.data, author=current_user, title=form.title.data)
+      db.session.add(post)
+      db.session.commit()
+      flash('Your post is now live!')
+      return redirect(url_for('main.index'))
+    return render_template('create_post.html', title='Create Post', 
+                            form=form) 
 
 @bp.route('/delete_post')
 def delete_post():
