@@ -1,3 +1,120 @@
 body {
   font-family: sans-serif;
+  color: darkslategray;
+  border: 1px solid transparent;
+  position: relative;
+  box-sizing: border-box;
+  min-height: 100%;
+  padding-bottom: 52px;
 }
+
+.hide {
+  display: none;
+  display: none;
+}
+
+.about {
+  background-color: #f20fe1;
+  color: white;
+}
+
+.home {
+  background-color: #ff2277;
+  color: white;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  font-size: 1.25rem;
+}
+
+a {
+  text-decoration: none;
+  color: #39c9bb;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+select, label, input, textarea {
+  font-size: 1.15rem;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-links {
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar .link {
+  padding: .25em 0;
+}
+
+.main-content {
+  padding-bottom: 50px;
+}
+
+.content {
+  margin: 1em auto;
+  max-width: 780px;
+}
+
+.post {
+  margin: .5em;
+  margin-left: .5em;
+  transition: margin-left .25s;
+  padding: .5em;
+}
+
+.post:hover {
+  margin-left: -.5em;
+  border-left: 10px solid darkturquoise;
+}
+
+.post:hover .post-title {
+  color: rgba(0,0,0,1);
+}
+
+.post-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: rgba(0,0,0,.75);
+}
+
+.post-timestamp {
+  color: turquoise; 
+}
+
+svg {
+ position: fixed;
+}
+
+#swirl-block {
+ top: -60px;
+ left: -60px;
+ z-index:-2; 
+ width: 100%;
+ height: auto;
+}
+
+.footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.footer .content {
+  display: flex;
+}
+
+.footer .content p {
+  margin: 6px;
+  color: #39c9bb;
+}
+
+
