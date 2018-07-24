@@ -1,7 +1,26 @@
 body {
   font-family: sans-serif;
   color: darkslategray;
+  border: 1px solid transparent;
   position: relative;
+  box-sizing: border-box;
+  min-height: 100%;
+  padding-bottom: 52px;
+}
+
+.hide {
+  display: none;
+  display: none;
+}
+
+.about {
+  background-color: #f20fe1;
+  color: white;
+}
+
+.home {
+  background-color: #ff2277;
+  color: white;
 }
 
 p {
@@ -48,13 +67,13 @@ select, label, input, textarea {
 .post {
   margin: .5em;
   margin-left: .5em;
-  transition: all .25s;
+  transition: margin-left .25s;
   padding: .5em;
 }
 
 .post:hover {
   margin-left: -.5em;
-  background-color: rgba(255,255,255,.5);
+  border-left: 10px solid darkturquoise;
 }
 
 .post:hover .post-title {
@@ -68,13 +87,16 @@ select, label, input, textarea {
 }
 
 .post-timestamp {
-  color: #b31800; 
+  color: turquoise; 
+}
+
+svg {
+ position: fixed;
 }
 
 #swirl-block {
- position: absolute;
- top: -150px;
- left: -100px;
+ top: -60px;
+ left: -60px;
  z-index:-2; 
  width: 100%;
  height: auto;
@@ -85,3 +107,14 @@ select, label, input, textarea {
   position: absolute;
   bottom: 0;
 }
+
+.footer .content {
+  display: flex;
+}
+
+.footer .content p {
+  margin: 6px;
+  color: #39c9bb;
+}
+
+

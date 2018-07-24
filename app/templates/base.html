@@ -10,11 +10,12 @@
     {{ moment.include_moment() }}
     <script src="{{ url_for('static', filename='js/slow-draw.js') }}"></script>
   </head>
-  <body>
+  <body class={{title}}>
     <nav class="navbar content"> 
       <div class="nav-links">
         <a class="link" href="{{ url_for('main.index') }}">Home</a>
         <a class="link" href="{{ url_for('main.about') }}">About</a>
+        <a class="link" href="{{ url_for('main.search') }}">Search</a>
       </div>
     </nav> 
     {% with messages = get_flashed_messages() %}
@@ -32,12 +33,14 @@
     <footer class="footer">
       <div class="content">
         {% if current_user.is_anonymous %}
-        <a href="{{ url_for('auth.login') }}">login</a>
+        <a class="hide" href="{{ url_for('auth.login') }}">login</a>
         {% else %}
         <a href="{{ url_for('main.user', username=current_user.username) }}">profile</a>
         <a href="{{ url_for('main.create_post') }}">write</a>
         <a href="{{ url_for('auth.logout') }}">logout</a>
         {% endif %}  
+        <p>contact</p>
+        <p>copyright 2018</p>
       </div>
     </footer>
   </body>

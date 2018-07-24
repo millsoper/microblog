@@ -18,12 +18,12 @@
       <span style="color: red;">[{{ error }}]</span> 
       {% endfor %}
     </p>
-    <p>
+    <p class="hide">
       Forgot your password?
       <a href="{{ url_for('auth.reset_password_request') }}">Click to reset it</a>
     </p>
     <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
     <p>{{ form.submit() }}</p>
-    <p>New User? <a href="{{ url_for('auth.register') }}">Click to Register!</a></p>
+    <p class="hide">New User? <a href="{{ url_for('auth.register') }}">Click to Register!</a></p>
   </form>
 {% endblock %}

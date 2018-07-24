@@ -22,8 +22,21 @@ def index():
       if posts.has_next else None
     prev_url = url_for('main.index', page=posts.prev_num) \
       if posts.has_prev else None
-    return render_template('index.html', title='Home', posts=posts.items,
+    return render_template('index.html', title='home', posts=posts.items,
                             next_url=next_url, prev_url=prev_url) 
+
+@bp.route('/search', methods=['GET'])
+def search():
+    page = request.args.get('page', 1, type=int)
+    posts =  Post.query.order_by(Post.timestamp.desc()).paginate(
+    page, current_app.config['POSTS_PER_PAGE'], False) 
+    next_url = url_for('main.index', page=posts.next_num) \
+      if posts.has_next else None
+    prev_url = url_for('main.index', page=posts.prev_num) \
+      if posts.has_prev else None
+    return render_template('search.html', title='search', posts=posts.items, next_url=next_url, prev_url=prev_url)
+
+
 
 @bp.route('/create_post', methods=['GET', 'POST'])
 @login_required
@@ -35,7 +48,7 @@ def create_post():
       db.session.commit()
       flash('Your post is now live!')
       return redirect(url_for('main.index'))
-    return render_template('create_post.html', title='Create Post', 
+    return render_template('create_post.html', title='create', 
                             form=form) 
 
 @bp.route('/delete_post')
@@ -61,7 +74,7 @@ def user(username):
 
 @bp.route('/about')
 def about():
-  return render_template('about.html', title='About')
+  return render_template('about.html', title='about')
 
 @bp.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
