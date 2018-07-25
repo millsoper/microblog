@@ -1,6 +1,7 @@
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
+from elasticsearch import Elasticsearch
 from flask import Flask, request, current_app
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
@@ -20,6 +21,8 @@ moment = Moment()
 def create_app(config_class=Config):
   app = Flask(__name__)
   app.config.from_object(config_class)
+  app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) \
+    if app.config['ELASTICSEARCH_URL'] else None
 
   db.init_app(app)
   migrate.init_app(app, db)

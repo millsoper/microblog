@@ -15,7 +15,13 @@
       <div class="nav-links">
         <a class="link" href="{{ url_for('main.index') }}">Home</a>
         <a class="link" href="{{ url_for('main.about') }}">About</a>
-        <a class="link" href="{{ url_for('main.search') }}">Search</a>
+        {% if g.search_form %}
+        <form class="navbar-form search-form" method="get" action="{{ url_for('main.search') }}">
+          <div class="form-group">
+            {{ g.search_form.q(size=20, class='form-control', placeholder=g.search_form.q.label.text) }}
+          </div>
+        </form>
+        {% endif %}
       </div>
     </nav> 
     {% with messages = get_flashed_messages() %}
